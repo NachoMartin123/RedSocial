@@ -1,0 +1,11 @@
+1: Guardar tus cambios (si no tienes te puedes saltar este paso)
+	1 - con terminal del git, ir al directorio donde este clonado el proyecto
+	2 - git add -A (para añadir tus cambios sin guardarlos todavia)
+	3 - git commit (para registrar tus cambios en un commit)
+
+2 - git pull (descargar version de git de la ultima persona que haya hecho cambios)
+3 - git add -A 
+4 - git commit
+5 - git push (actualizar repositorio)
+
+EXTRA: "git status" muestra el estado actual del repositorio, cambios por añadir, cambios en repositorio...
