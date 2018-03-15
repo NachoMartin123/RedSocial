@@ -12,13 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.User;
-import com.uniovi.services.RequestsService;
+//import com.uniovi.services.RequestsService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SignUpFormValidator;
@@ -29,8 +28,8 @@ public class UsersController {
 	@Autowired
 	private UsersService usersService;
 	
-	@Autowired
-	private RequestsService requestsService;
+//	@Autowired
+//	private RequestsService requestsService;
 	
 	@Autowired
 	private SecurityService securityService;
@@ -41,9 +40,8 @@ public class UsersController {
 	@RequestMapping("/user/list" )
 	public String getListado(Model model,Pageable pageable,Principal principal,
 			@RequestParam(value = "", required=false) String searchText){
-		String dni = principal.getName(); // DNI es el name de la autenticación
-		User userEnSesion = usersService.getUserByEmail(dni);
-		
+		String email = principal.getName();
+		User userEnSesion = usersService.getUserByEmail(email);
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		users =  usersService.getUsers(pageable);
 		if (searchText != null && !searchText.isEmpty()) {

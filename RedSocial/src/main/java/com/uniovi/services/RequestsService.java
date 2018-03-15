@@ -1,9 +1,7 @@
 package com.uniovi.services;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +15,8 @@ import com.uniovi.repositories.RequestsRepository;
 @Service
 public class RequestsService {
 	
-	@Autowired
-	private HttpSession httpSession;
+//	@Autowired
+//	private HttpSession httpSession;
 	
 	@Autowired
 	private RequestsRepository requestsRepository;

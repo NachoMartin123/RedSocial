@@ -33,6 +33,10 @@ public class User {
 	@Transient 
 	private String passwordConfirm;
 	
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Publication> publications;
+	
 	//coleccion de invitaciones RECIBIDAS
 	@OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
 	private Set<Request> requestsReceived = new HashSet<Request>();
@@ -48,12 +52,6 @@ public class User {
 			joinColumns= {@JoinColumn(name="user_id", referencedColumnName="id")},
 			inverseJoinColumns = {@JoinColumn(name="friend_id",referencedColumnName="id")})
 	private Set<User> friendList = new HashSet<User>();//lista de amigos 
-	
-//	@OneToMany
-//	private Set<User> friendList = new HashSet<User>();//lista de amigos del nuevo usuario añadido como amigo
-//pongamos como ejemplo: 'friends'es lista de vendedores y 'newAmigoFriends' es lista de compradores
-    
-	
 	
 	public User(String dni, String email, String name, String lastName) {
 		super();
@@ -170,16 +168,14 @@ public class User {
 		this.friendList = friendList;
 	}
 
-//	public Set<User> getAmigoFriendList() {
-//		return amigoFriendList;
-//	}
-//
-//	public void setAmigoFriendList(Set<User> amigoFriendList) {
-//		this.amigoFriendList = amigoFriendList;
-//	}
-//	
 	
-	
+	public void setPublications(Set<Publication> publications) {
+		this.publications = publications;
+	}
+
+	public Set<Publication> getPublications() {
+		return publications;
+	}
 
 
 }

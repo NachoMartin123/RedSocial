@@ -15,6 +15,14 @@
 				<li><a href="/user/list" th:text="#{navegador.verUsuarios}">Ver Usuarios</a></li>
 				<li><a href="/request/list" th:text="#{navegador.peticionesRecibidas}">Peticiones recibidas</a></li>
 				<li><a href="/friend/list" th:text="#{navegador.misAmigos}">Mis amigos</a></li>
+				<li id="publicaciones-menu" class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{publicaciones.message}"> Publicaciones<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a  id ="crearPublication" href="/publication/addPublication" th:text="#{crear_publicacion.message}">Crear Publicacion</a></li>
+						<li><a id="misPublicaciones" href="/publication/listPublications" th:text="#{mis_publicaciones.message}">Mis publicaciones</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href=" #"
@@ -34,13 +42,13 @@
 								th:text="#{language.es}">Español</span>
 						</a></li>
 					</ul></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/signup"
+				<li sec:authorize="!isAuthenticated()"><a id="btnRegistro" href="/signup"
 					th:text="#{signup.message}"> <span
 						class="glyphicon glyphicon-user"></span> Registrate
 				</a></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/login"
+				<li sec:authorize="!isAuthenticated()"><a id="btnIdentificate" href="/login"
 					th:text="#{login.message}"> <span
-						class="glyphicon glyphicon-log-in"></span> Identifícate
+						class="glyphicon glyphicon-log-in"></span> Identificate
 				</a></li>
 				<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{navegador.Desconectar}"> <span
 						class="glyphicon glyphicon-log-out"

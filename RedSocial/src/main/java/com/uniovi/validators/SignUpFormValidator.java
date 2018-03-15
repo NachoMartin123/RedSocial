@@ -1,5 +1,8 @@
 package com.uniovi.validators;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -23,15 +26,23 @@ public class SignUpFormValidator  implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
+		
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
-		if (user.getEmail().length() < 5 || user.getEmail().length() > 24) {
+		Matcher mather = pattern.matcher(user.getEmail());
+		if (user.getEmail().length() < 3 || user.getEmail().length() > 24) {
 			errors.rejectValue("email", "Error.signup.dni.length");
-		}	
+		}
+		if(mather.find() == false) {
+			errors.rejectValue("email","Error.signup.email.incorrect.format");
+		}
 		if (usersService.getUserByEmail(user.getEmail()) != null) {
 			errors.rejectValue("email", "Error.signup.dni.duplicate");
 		}
-		if (user.getName().length() < 5 || user.getName().length() > 24) {
+		if (user.getName().length() < 3 || user.getName().length() > 24) {
 			errors.rejectValue("name", "Error.signup.name.length");
 		}
 		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
