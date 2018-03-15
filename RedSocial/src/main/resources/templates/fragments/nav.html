@@ -12,8 +12,15 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/">Home</a></li>
-				<li><a href="/user/list">Ver Usuarios</a></li>
-					
+				<li><a href="/user/list" id="listaUsuarios" th:text="#{ver_usuarios.message}">Ver Usuarios</a></li>
+				<li id="publicaciones-menu" class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{publicaciones.message}"> Publicaciones<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a  id ="crearPublication" href="/publication/addPublication" th:text="#{crear_publicacion.message}">Crear Publicacion</a></li>
+						<li><a id="misPublicaciones" href="/publication/listPublications" th:text="#{mis_publicaciones.message}">Mis publicaciones</a></li>
+					</ul>
+			
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href=" #"
@@ -33,16 +40,16 @@
 								th:text="#{language.es}">Español</span>
 						</a></li>
 					</ul></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/signup"
+				<li sec:authorize="!isAuthenticated()"><a id="btnRegistro" href="/signup"
 					th:text="#{signup.message}"> <span
 						class="glyphicon glyphicon-user"></span> Registrate
 				</a></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/login"
+				<li sec:authorize="!isAuthenticated()"><a id="btnIdentificate" href="/login"
 					th:text="#{login.message}"> <span
-						class="glyphicon glyphicon-log-in"></span> Identifícate
+						class="glyphicon glyphicon-log-in"></span> Identificate
 				</a></li>
-				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
-						class="glyphicon glyphicon-log-out"></span> Desconectar
+				<li sec:authorize="isAuthenticated()"><a id="btnDesconectar" href="/logout" th:text="#{desconectar.message}"> <span
+						class="glyphicon glyphicon-log-out" ></span> Desconectar
 				</a></li>
 			</ul>
 		</div>

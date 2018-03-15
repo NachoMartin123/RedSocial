@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+@SuppressWarnings("deprecation")
 @Configuration
 public class CustomConfiguration extends WebMvcConfigurerAdapter{
 
@@ -36,7 +37,7 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();

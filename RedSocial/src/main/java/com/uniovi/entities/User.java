@@ -1,9 +1,13 @@
 package com.uniovi.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -16,6 +20,7 @@ public class User {
 	private long id;
 	@Column(unique = true)
 	private String dni;
+	@Column(unique = true)
 	private String email;
 	private String name;
 	private String lastName;
@@ -23,6 +28,8 @@ public class User {
 	private String password;
 	@Transient 
 	private String passwordConfirm;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Publication> publications;
 	
 	public User(String dni, String email, String name, String lastName) {
 		super();
@@ -99,6 +106,12 @@ public class User {
 		this.email = email;
 	}
 
-	
+	public void setPublications(Set<Publication> publications) {
+		this.publications = publications;
+	}
+
+	public Set<Publication> getPublications() {
+		return publications;
+	}
 
 }
