@@ -10,10 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Request;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.RequestsRepository;
 import com.uniovi.repositories.UsersRepository;
 
 @Service
@@ -21,6 +25,7 @@ public class UsersService {
 	
 	@Autowired 
 	private UsersRepository usersRepository;
+	
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -35,6 +40,7 @@ public class UsersService {
 		Page<User> users = usersRepository.findAll(pageable);
 		return users;
 	}
+	
 
 	public void addUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -55,7 +61,19 @@ public class UsersService {
 	
 	public Page<User> getUsersForUser(Pageable pageable,User user) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		users = getUsers(pageable);
+		users= usersRepository.findAll(pageable);
+		return users;
+	}
+
+
+	public User findById(Long id) {
+		return usersRepository.findById(id).orElse(null);
+	}
+
+
+	public Page<User> getFriendsForUser(Pageable pageable, User user) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		users = usersRepository.searchFriendsForUser(pageable, user);
 		return users;
 	}
 

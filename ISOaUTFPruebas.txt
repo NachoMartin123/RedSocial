@@ -1,0 +1,12 @@
+PARA MOSTRAR ARCHIVOS EN UTF A PRUEBAS. EN LAS PRUEBAS EL CODIGO JAVA PASA A VALORES ISO
+HAY QUE PASAR EL TEXT DE ISO A UTF-8
+
+PO-view
+    |
+PO_properties
+
+String getString (String key)
+
+String s = bundle.get
+	
+	return new String (s.getBytes("ISO.8859-1"), "UTF-8");

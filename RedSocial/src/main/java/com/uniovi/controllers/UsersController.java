@@ -12,11 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.User;
+import com.uniovi.services.RequestsService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SignUpFormValidator;
@@ -28,6 +30,9 @@ public class UsersController {
 	private UsersService usersService;
 	
 	@Autowired
+	private RequestsService requestsService;
+	
+	@Autowired
 	private SecurityService securityService;
 	
 	@Autowired
@@ -37,17 +42,32 @@ public class UsersController {
 	public String getListado(Model model,Pageable pageable,Principal principal,
 			@RequestParam(value = "", required=false) String searchText){
 		String dni = principal.getName(); // DNI es el name de la autenticación
-		User user = usersService.getUserByEmail(dni);
+		User userEnSesion = usersService.getUserByEmail(dni);
+		
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		users =  usersService.getUsers(pageable);
 		if (searchText != null && !searchText.isEmpty()) {
-			users = usersService.searchUsersByNameForUser(pageable,searchText,user);
+			users = usersService.searchUsersByNameForUser(pageable,searchText,userEnSesion);
 		}else {
-			users = usersService.getUsersForUser(pageable, user) ;
+			users = usersService.getUsersForUser(pageable, userEnSesion) ;
 		}
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("page", users);
+		model.addAttribute("userEnSesion", userEnSesion);
 		return "user/list";
+	}
+	
+	@RequestMapping("/user/list/update" )
+	public String updateListado(Model model,Pageable pageable,Principal principal){
+		String email = principal.getName(); // DNI es el name de la autenticación
+		User userEnSesion = usersService.getUserByEmail(email);
+		
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		users =  usersService.getUsers(pageable);
+		
+		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("userEnSesion", userEnSesion);
+		return "user/list :: tableUsers";
 	}
 
 	@RequestMapping(value = "/user/add")
@@ -89,4 +109,6 @@ public class UsersController {
 	public String home(Model model) {
 		return "home";
 	}
+	
+	
 }

@@ -1,11 +1,19 @@
 package com.uniovi.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "user")
@@ -14,8 +22,9 @@ public class User {
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(unique = true)
+//	@Column(unique = true)
 	private String dni;
+	@Column(unique = true)
 	private String email;
 	private String name;
 	private String lastName;
@@ -23,6 +32,28 @@ public class User {
 	private String password;
 	@Transient 
 	private String passwordConfirm;
+	
+	//coleccion de invitaciones RECIBIDAS
+	@OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
+	private Set<Request> requestsReceived = new HashSet<Request>();
+	
+	
+	@OneToMany(mappedBy = "userMaker", cascade = CascadeType.ALL)
+	private Set<Request> requestsMaked = new HashSet<Request>();
+
+
+	//relacion many to many para la lista de amigos
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="friends", 
+			joinColumns= {@JoinColumn(name="user_id", referencedColumnName="id")},
+			inverseJoinColumns = {@JoinColumn(name="friend_id",referencedColumnName="id")})
+	private Set<User> friendList = new HashSet<User>();//lista de amigos 
+	
+//	@OneToMany
+//	private Set<User> friendList = new HashSet<User>();//lista de amigos del nuevo usuario añadido como amigo
+//pongamos como ejemplo: 'friends'es lista de vendedores y 'newAmigoFriends' es lista de compradores
+    
+	
 	
 	public User(String dni, String email, String name, String lastName) {
 		super();
@@ -99,6 +130,56 @@ public class User {
 		this.email = email;
 	}
 
+	public Set<Request> getRequestsReceived() {
+		return requestsReceived;
+	}
+
+	public void setRequestsReceived(Set<Request> requestsReceived) {
+		this.requestsReceived = requestsReceived;
+	}
+
+	public Set<Request> getRequestsMaked() {
+		return requestsMaked;
+	}
+
+	public void setRequestsMaked(Set<Request> requestsMaked) {
+		this.requestsMaked = requestsMaked;
+	}
+
+	public boolean containsRequestTo(User target) {
+		for(Request r: getRequestsMaked()) {
+			if(r.getUserTarget().equals(target))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", dni=" + dni + ", email=" + email + ", name=" + name + ", lastName=" + lastName
+				+ ", role=" + role + ", password=" + password + ", passwordConfirm=" + passwordConfirm
+				+ ", requestsReceived=" + requestsReceived.size() + ", requestsMaked=" + requestsMaked.size() + 
+				", friends=" + friendList.size() +"]";
+	}
+
+	public Set<User> getFriendList() {
+		return friendList;
+	}
+
+	public void setFriendList(Set<User> friendList) {
+		this.friendList = friendList;
+	}
+
+//	public Set<User> getAmigoFriendList() {
+//		return amigoFriendList;
+//	}
+//
+//	public void setAmigoFriendList(Set<User> amigoFriendList) {
+//		this.amigoFriendList = amigoFriendList;
+//	}
+//	
 	
+	
+
 
 }
