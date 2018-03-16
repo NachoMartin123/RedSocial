@@ -48,14 +48,14 @@ public class UsersService {
 	public Page<User> searchUsersByNameForUser(Pageable pageable,String searchText, User user) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		searchText = "%"+searchText+"%";
-		users = usersRepository.searchByNameOrEmail(pageable,searchText);
+		users = usersRepository.searchByNameOrEmail(pageable,searchText, user);
 		
 		return users;
 	}
 	
 	public Page<User> getUsersForUser(Pageable pageable,User user) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		users= usersRepository.findAll(pageable);
+		users= usersRepository.findAllButUser(pageable, user);
 		return users;
 	}
 

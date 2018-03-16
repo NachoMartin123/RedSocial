@@ -11,7 +11,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-				<li><a href="/">Home</a></li>	
+				<li><a href="/home">Home</a></li>	
 				<li><a href="/user/list" th:text="#{navegador.verUsuarios}">Ver Usuarios</a></li>
 				<li><a href="/request/list" th:text="#{navegador.peticionesRecibidas}">Peticiones recibidas</a></li>
 				<li><a href="/friend/list" th:text="#{navegador.misAmigos}">Mis amigos</a></li>

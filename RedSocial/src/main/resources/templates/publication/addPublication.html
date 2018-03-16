@@ -11,7 +11,7 @@
 				<label class="control-label col-sm-2" for="titulo" th:text="#{titulo.message}">Titulo:</label>
 				<div class="col-sm-10">
 					<input id="titulo" type="text" class="form-control" name="titulo" 
-						placeholder="Publicacion" required="true" />
+						th:placeholder="#{publication.add.placeholderTitulo}" required="true" />
 					<span class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 				<label class="control-label col-sm-2" for="texto" th:text="#{texto.message}">Texto:</label>
 				<div class="col-sm-10">
 					<input id="texto" type="text" class="form-control" name="texto" 
-						placeholder="Descripcion" required="true" />
+						th:placeholder="#{publication.add.placeholderDescripcion}" required="true" />
 					<span class="text-danger" th:if="${#fields.hasErrors('texto')}" th:errors="*{texto}"/>
 				</div>
 			</div>
