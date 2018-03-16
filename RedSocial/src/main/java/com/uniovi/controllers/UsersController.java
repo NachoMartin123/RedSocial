@@ -61,7 +61,7 @@ public class UsersController {
 		User userEnSesion = usersService.getUserByEmail(email);
 		
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		users =  usersService.getUsers(pageable);
+		users =  usersService.getUsersForUser(pageable, userEnSesion);
 		
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("userEnSesion", userEnSesion);

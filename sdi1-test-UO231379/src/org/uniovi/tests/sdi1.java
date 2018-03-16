@@ -226,11 +226,11 @@ public class sdi1 {
 		//Pinchamos en la opción de menu de ver usuarios: 
 		PO_HomeView.clickOption(driver, "/request/list", "text", "Listado de invitaciones recibidas:");
 		//comprobación de que existen invitaciones
-		SeleniumUtils.textoPresentePagina(driver, "Andrea");
 		SeleniumUtils.textoPresentePagina(driver, "María");
 		SeleniumUtils.textoPresentePagina(driver, "José");
 		SeleniumUtils.textoPresentePagina(driver, "Sansa");
 		SeleniumUtils.textoPresentePagina(driver, "Cersei");
+		SeleniumUtils.textoPresentePagina(driver, "Jon");
 	}
 	
 	// PR7.1 [AcepInvVal] Aceptar una invitación recibida.
