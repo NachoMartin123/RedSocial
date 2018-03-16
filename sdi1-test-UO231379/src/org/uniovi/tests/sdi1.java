@@ -29,8 +29,8 @@ public class sdi1 {
 
 	// En Windows (Debe ser la versión 46.0 y desactivar las actualizacioens
 	// automáticas)):
-//	static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
-	static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
+	static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
+	//static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
 	// //En MACOSX (Debe ser la versión 46.0 y desactivar las actualizaciones
 	// automáticas):
 	// static String PathFirefox =
@@ -71,7 +71,7 @@ public class sdi1 {
 		// Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "signup", "id", "btnRegistro");
 		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "gabriela@gmail.com", "Gabriela", "123456", "123456");
+		PO_RegisterView.fillForm(driver, "carla@gmail.com", "Carla", "123456", "123456");
 		// Comprobamos que entramos en la sección privada
 		PO_View.checkElement(driver, "id", "zonaPrivada");
 	}
@@ -84,7 +84,7 @@ public class sdi1 {
 		// Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "signup", "id", "btnRegistro");
 		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "gabriela@gmail.com", "Gabriela", "123456", "111111");
+		PO_RegisterView.fillForm(driver, "nerea@gmail.com", "Nerea", "123456", "111111");
 		PO_View.getP();
 		// COmprobamos el error de contraseña no coincide.
 		PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH());
@@ -120,6 +120,7 @@ public class sdi1 {
 		// Comprobamos que entramos en la sección privada
 		PO_View.checkElement(driver, "id", "zonaPrivada");
 		//Pinchamos en la opción de menu de ver usuarios: 
+		//SeleniumUtils.esperarSegundos(driver, 1);
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"listaUsuarios\"]"); 
 		elementos.get(0).click();
 		//Contamos el numero de filas con usuarios
@@ -130,10 +131,13 @@ public class sdi1 {
 		
 	}
 	
-	// PR3.1[LisUsrInVal] Acceso al listado de usuarios desde un usuario no autenticado
+	// PR3.2[LisUsrInVal] Acceso al listado de usuarios desde un usuario no autenticado
 	@Test
 	public void LisUsrInVal() {
-		assertFalse(1>0);
+		driver.navigate().to("http://localhost:8090/user/list");
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		
+		
 	}
 	
 	// PR4.1[BusUsrVal] Busqueda valida en listado de usuarios desde usuario en sesion
@@ -162,11 +166,11 @@ public class sdi1 {
 		PO_RegisterPublicationView.clickOption(driver, "logout", "id", "btnIdentificate");
 		
 	}
-	// PR4.2[LisUsrInVal] // NO CREO QUE ESTE BIEN ASI
+	// PR4.2[LisUsrInVal] 
 		@Test
 		public void BusUsrInVal() {
 		
-		driver.navigate().to("http://localhost:8090/user/list");
+		driver.navigate().to("http://localhost:8090/user/list?searchText=mar");
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		
 		}
@@ -276,7 +280,7 @@ public class sdi1 {
 	}
 	
 	// PR9.1 [PubVal] Crear una publicación con datos válidos.
-	@Test
+	/*@Test
 	public void PubVal() {
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -293,7 +297,7 @@ public class sdi1 {
 		PO_View.checkElement(driver, "id", "listaPublicaciones");
 		
 		
-	}
+	}*/
 	
 	// PR10.1 [LisPubVal] Acceso al listado de publicaciones desde un usuario en sesión.
 	@Test
