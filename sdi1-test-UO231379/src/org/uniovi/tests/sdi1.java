@@ -17,10 +17,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
+import com.uniovi.tests.pageobjects.PO_NavView;
 import com.uniovi.tests.pageobjects.PO_RegisterPublicationView;
 import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
-import com.uniovi.tests.pageobjects.PO_UserListView;
 import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
 
@@ -180,8 +180,16 @@ public class sdi1 {
 		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
 		//Pinchamos en la opción de menu de ver usuarios: 
 		PO_HomeView.clickOption(driver, "/user/list", "text", "Usuarios");
-		assertEquals("Agregar amigo",PO_UserListView.getButtonText(driver, "resendButton7"));
-		PO_UserListView.clickButton(driver, "resendButton7");
+		SeleniumUtils.textoPresentePagina(driver, "Lucas");
+		SeleniumUtils.textoPresentePagina(driver, "María");
+		SeleniumUtils.textoPresentePagina(driver, "Marta");
+		SeleniumUtils.textoPresentePagina(driver, "Pelayo");
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		assertEquals("Agregar amigo",PO_NavView.getButtonText(driver, "resendButton13"));
+//		PO_NavView.clickOption(driver, "Agregar amigo", "id", "resendButton7");
+		PO_NavView.clickButton(driver, "resendButton13");
+		
+		
 	}
 
 	// PR5.2[InvInVal] Enviar una invitación de amistad a un usuario al que ya le habíamos
@@ -195,8 +203,16 @@ public class sdi1 {
 		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
 		//Pinchamos en la opción de menu de ver usuarios: 
 		PO_HomeView.clickOption(driver, "/user/list", "text", "Usuarios");
-		PO_UserListView.clickButton(driver, "noresendButton4");
-		assertEquals("Petición enviada",PO_UserListView.getButtonText(driver, "noresendButton4"));
+		SeleniumUtils.textoPresentePagina(driver, "Lucas");
+		SeleniumUtils.textoPresentePagina(driver, "María");
+		SeleniumUtils.textoPresentePagina(driver, "Marta");
+		SeleniumUtils.textoPresentePagina(driver, "Pelayo");
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		assertEquals("Petición enviada",PO_NavView.getButtonText(driver, "noresendButton4"));
+		PO_NavView.clickButton(driver, "noresendButton4");
+		//		PO_HomeView.clickOption(driver, "Petición enviada", "id", "noresendButton4");
+		//no pasa nada
+		assertEquals("Petición enviada",PO_NavView.getButtonText(driver, "noresendButton4"));
 	}
 	
 	// PR6.1 [LisInvVal] Listar las invitaciones recibidas por un usuario, realizar la comprobación
@@ -204,25 +220,59 @@ public class sdi1 {
 	@Test
 	public void LisInvVal() {//NACHO
 		//Vamos al formulario de registro
-//		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
-//		// Rellenamos el formulario.
-//		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
-//		//Pinchamos en la opción de menu de ver usuarios: 
-//		PO_HomeView.clickOption(driver, "Peticiones recibidas", "text", "Listado de invitaciones recibidas:");
-		assertFalse(1>0);
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
+		//Pinchamos en la opción de menu de ver usuarios: 
+		PO_HomeView.clickOption(driver, "/request/list", "text", "Listado de invitaciones recibidas:");
+		//comprobación de que existen invitaciones
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		SeleniumUtils.textoPresentePagina(driver, "María");
+		SeleniumUtils.textoPresentePagina(driver, "José");
+		SeleniumUtils.textoPresentePagina(driver, "Sansa");
+		SeleniumUtils.textoPresentePagina(driver, "Cersei");
 	}
 	
 	// PR7.1 [AcepInvVal] Aceptar una invitación recibida.
 	@Test
-	public void AcepInvVal() {
-		assertFalse(1>0);
+	public void AcepInvVal() {//NACHO
+		//Vamos al formulario de registro
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
+		//Pinchamos en la opción de menu de ver usuarios: 
+		PO_NavView.clickOption(driver, "/request/list", "text", "Listado de invitaciones recibidas:");
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		SeleniumUtils.textoPresentePagina(driver, "María");
+		SeleniumUtils.textoPresentePagina(driver, "José");
+		SeleniumUtils.textoPresentePagina(driver, "Sansa");
+		SeleniumUtils.textoPresentePagina(driver, "Cersei");
+		//aceptar invitacion de andrea
+//		PO_NavView.clickOption(driver, "Aceptar", "id", "acceptFriendButton24");
+		PO_NavView.clickButton(driver, "acceptFriendButton24");
+		SeleniumUtils.esperarSegundos(driver, 2);
+		SeleniumUtils.textoNoPresentePagina(driver, "Andrea");
 	}
 	
 	// PR8.1 [ListAmiVal] Listar los amigos de un usuario, realizar la comprobación con 
 	//una lista que al menos tenga un amigo.
 	@Test
 	public void ListAmiVal() {
-		assertFalse(1>0);
+		//Vamos al formulario de registro
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
+		//Pinchamos en la opción de menu de ver usuarios: 
+		PO_NavView.clickOption(driver, "/friend/list", "text", "Mis amigos");
+		SeleniumUtils.textoNoPresentePagina(driver, "Andrea");
+		PO_NavView.clickOption(driver, "/request/list", "text", "Listado de invitaciones recibidas:");
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		//aceptar peticion de andrea
+		PO_NavView.clickOption(driver, "Aceptar", "id", "acceptFriendButton24");
+		SeleniumUtils.textoNoPresentePagina(driver, "Andrea");
+		PO_NavView.clickOption(driver, "/friend/list", "text", "Mis amigos");
+		//vuelta para comprobar que andrea es amiga
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
 	}
 	
 	// PR9.1 [PubVal] Crear una publicación con datos válidos.

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class PO_RegisterView extends PO_NavView {
+	
 	static public void fillForm(WebDriver driver, String emailp, String namep, String passwordp,
 			String passwordconfp) {
 		WebElement email = driver.findElement(By.id("email"));

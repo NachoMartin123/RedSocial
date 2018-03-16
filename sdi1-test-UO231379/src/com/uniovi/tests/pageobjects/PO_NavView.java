@@ -46,4 +46,16 @@ public class PO_NavView extends PO_View {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", textLanguage, getTimeout());
 		elementos.get(0).click();
 	}
+	
+	
+	static public void clickButton(WebDriver driver, String idBoton) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", idBoton, getTimeout());
+		elementos.get(0).click(); // Esperamos a que aparezca el menú de opciones.
+		
+	}
+
+	static public String getButtonText(WebDriver driver, String idBoton) {
+		WebElement boton = driver.findElement(By.id(idBoton));
+		return boton.getText();
+	}
 }
