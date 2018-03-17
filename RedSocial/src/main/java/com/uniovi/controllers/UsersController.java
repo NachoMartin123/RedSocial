@@ -99,7 +99,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+		if (error != null) {
+	        model.addAttribute("error", "Datos incorrectos");
+	    }
 		return "login";
 	}
 

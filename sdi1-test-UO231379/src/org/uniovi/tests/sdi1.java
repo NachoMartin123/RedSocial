@@ -109,6 +109,8 @@ public class sdi1 {
 		PO_LoginView.fillForm(driver, "daniel@gmail.com", "123456");
 		// Comprobamos que seguimos en la vista de login
 		PO_View.checkElement(driver, "id", "vistaLogin");
+		PO_View.checkElement(driver, "text", "Datos incorrectos");
+		
 	}
 
 	// PR3.1[LisUsrVal] Acceso al listado de usuarios desde un usuario en sesion
