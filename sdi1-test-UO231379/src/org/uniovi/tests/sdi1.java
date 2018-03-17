@@ -29,8 +29,8 @@ public class sdi1 {
 
 	// En Windows (Debe ser la versión 46.0 y desactivar las actualizacioens
 	// automáticas)):
-	static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
-	//static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
+//	static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
+	static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
 	// //En MACOSX (Debe ser la versión 46.0 y desactivar las actualizaciones
 	// automáticas):
 	// static String PathFirefox =
@@ -179,7 +179,7 @@ public class sdi1 {
 
 	// PR5.1[InvVal] Enviar una invitación de amistad a un usuario de forma valida.
 	@Test
-	public void InvVal() {//NACHO
+	public void InvVal() {
 		//Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -194,15 +194,13 @@ public class sdi1 {
 		assertEquals("Agregar amigo",PO_NavView.getButtonText(driver, "resendButton13"));
 //		PO_NavView.clickOption(driver, "Agregar amigo", "id", "resendButton7");
 		PO_NavView.clickButton(driver, "resendButton13");
-		
-		
 	}
 
 	// PR5.2[InvInVal] Enviar una invitación de amistad a un usuario al que ya le habíamos
 	//invitado la invitación previamente. No debería dejarnos enviar la invitación,
 	//se podría ocultar el botón de enviar invitación o notificar que ya había sido enviada previamente.
 	@Test
-	public void InvInVal() {//NACHO
+	public void InvInVal() {
 		//Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -224,7 +222,7 @@ public class sdi1 {
 	// PR6.1 [LisInvVal] Listar las invitaciones recibidas por un usuario, realizar la comprobación
 	//con una lista que al menos tenga una invitación recibida.
 	@Test
-	public void LisInvVal() {//NACHO
+	public void LisInvVal() {
 		//Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -241,7 +239,7 @@ public class sdi1 {
 	
 	// PR7.1 [AcepInvVal] Aceptar una invitación recibida.
 	@Test
-	public void AcepInvVal() {//NACHO
+	public void AcepInvVal() {
 		//Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -323,6 +321,7 @@ public class sdi1 {
 	// PR11.1 [LisPubAmiVal] Listar las publicaciones de un usuario amigo
 	@Test
 	public void LisPubAmiVal() {
+		//caso de uso opcional no implementado
 		assertFalse(1>0);
 	}
 	
@@ -348,6 +347,7 @@ public class sdi1 {
 	// PR13.1 [AdInVal] Inicio de sesión como administrador con datos válidos.
 	@Test
 	public void AdInVal() {
+		//caso de uso opcional no implementado
 		assertFalse(1>0);
 	}
 	
@@ -355,6 +355,7 @@ public class sdi1 {
 	//de un usuario que no tenga perfil administrador).
 	@Test
 	public void AdInInVal() {
+		//caso de uso opcional no implementado
 		assertFalse(1>0);
 	}
 	
@@ -363,12 +364,14 @@ public class sdi1 {
 	@Test
 	public void AdLisUsrVal() {
 		assertFalse(1>0);
+		//caso de uso opcional no implementado
 	}
 	
 	// PR15.1 [AdBorUsrVal] Desde un usuario identificado en sesión como administrador eliminar un 
 	//usuario existente en la aplicación.
 	@Test
 	public void AdBorUsrVal() {
+		//caso de uso opcional no implementado
 		assertFalse(1>0);
 	}
 
