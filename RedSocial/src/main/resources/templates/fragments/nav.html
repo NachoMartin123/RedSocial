@@ -13,8 +13,8 @@
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/home">Home</a></li>	
 				<li><a id="listaUsuarios" href="/user/list" th:text="#{navegador.verUsuarios}">Ver Usuarios</a></li>
-				<li><a href="/request/list" th:text="#{navegador.peticionesRecibidas}">Peticiones recibidas</a></li>
-				<li><a href="/friend/list" th:text="#{navegador.misAmigos}">Mis amigos</a></li>
+				<li><a id="peticionesRecibidas" href="/request/list" th:text="#{navegador.peticionesRecibidas}">Peticiones recibidas</a></li>
+				<li><a id="misAmigos" href="/friend/list" th:text="#{navegador.misAmigos}">Mis amigos</a></li>
 				<li id="publicaciones-menu" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{publicaciones.message}"> Publicaciones<span class="caret"></span>
 				</a>

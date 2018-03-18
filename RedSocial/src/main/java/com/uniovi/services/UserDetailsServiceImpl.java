@@ -14,12 +14,23 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.UsersRepository;
 
+/**
+ * Servicio basado en UserDetailsService que permite gestionar la autenticacion
+ * y acceso de usuarios de la aplicacion
+ * 
+ * @author UO231379, UO239718
+ * 
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
 	private UsersRepository usersRepository;
 
+	/**
+	 * Metodo que obtienen el usaurio de la aplicion y crea un userDetails con
+	 * su email y contraseña
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = usersRepository.findByEmail(email);

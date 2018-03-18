@@ -21,8 +21,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="user : ${friendList}">
-						<td th:text="${user.name}">Nombre del usuario</td>
-						<td th:text="${user.email}">71888888X</td>
+						<td><a id="nombreAmigo" th:href="${'/publication/publicationsFriend/' + user}" th:text="${user.name}">Nombre del usuario</a></td>
+						<td  th:text="${user.email}">71888888X</td>
 					</tr>
 				</tbody>
 			</table>

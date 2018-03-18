@@ -1,6 +1,8 @@
 package org.uniovi.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -19,7 +21,6 @@ import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_NavView;
 import com.uniovi.tests.pageobjects.PO_RegisterPublicationView;
-import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
@@ -29,8 +30,8 @@ public class sdi1 {
 
 	// En Windows (Debe ser la versión 46.0 y desactivar las actualizacioens
 	// automáticas)):
-//	static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
-	static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
+    static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
+	//static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
 	// //En MACOSX (Debe ser la versión 46.0 y desactivar las actualizaciones
 	// automáticas):
 	// static String PathFirefox =
@@ -87,7 +88,8 @@ public class sdi1 {
 		PO_RegisterView.fillForm(driver, "nerea@gmail.com", "Nerea", "123456", "111111");
 		PO_View.getP();
 		// COmprobamos el error de contraseña no coincide.
-		PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH());
+		//PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH());
+		PO_View.checkElement(driver, "text", "Las contraseñas no coinciden");
 	}
 
 	// PR2.1[InVal] Prueba del formulario de login.Login con datos correctos
@@ -280,7 +282,7 @@ public class sdi1 {
 	}
 	
 	// PR9.1 [PubVal] Crear una publicación con datos válidos.
-	/*@Test
+	@Test
 	public void PubVal() {
 		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
 		// Rellenamos el formulario.
@@ -290,14 +292,15 @@ public class sdi1 {
 		//Pinchamos en la opción de menu de ver usuarios: 
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"publicaciones-menu\"]/a"); 
 		elementos.get(0).click();
-		SeleniumUtils.esperarSegundos(driver, 1);
 		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"crearPublication\"]");
 		elementos.get(0).click();
+		SeleniumUtils.esperarSegundos(driver, 5);
 		PO_RegisterPublicationView.fillFormAddPublication(driver, "prueba1", "Esto es una prueba");
 		PO_View.checkElement(driver, "id", "listaPublicaciones");
+		elementos = PO_View.checkElement(driver, "text", "prueba1");
 		
 		
-	}*/
+	}
 	
 	// PR10.1 [LisPubVal] Acceso al listado de publicaciones desde un usuario en sesión.
 	@Test
@@ -321,15 +324,45 @@ public class sdi1 {
 	// PR11.1 [LisPubAmiVal] Listar las publicaciones de un usuario amigo
 	@Test
 	public void LisPubAmiVal() {
-		//caso de uso opcional no implementado
-		assertFalse(1>0);
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
+		// Comprobamos que entramos en la sección privada
+		PO_View.checkElement(driver, "id", "zonaPrivada");
+		//Pinchamos en la opción de menu de publicaciones recibidas: 
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"peticionesRecibidas\"]"); 
+		elementos.get(0).click();
+		//Pinchamos en el boton de aceptar amistad
+		SeleniumUtils.esperarSegundos(driver, 1);
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"acceptFriendButton25\"]"); 
+		elementos.get(0).click();
+		//Pinchamos en la opcion del menu mis amigos
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"misAmigos\"]"); 
+		SeleniumUtils.esperarSegundos(driver, 1);
+		elementos.get(0).click();
+		SeleniumUtils.esperarSegundos(driver, 1);
+		//Pinchamos en el nombre "andrea" para ver sus publicaciones
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"nombreAmigo\"]"); 
+		elementos.get(0).click();
+		//Comprobamos que aparece la publicacion Publicacion5
+		elementos = PO_View.checkElement(driver, "text", "Publicacion5");
+		
+		
 	}
 	
 	// PR11.2 [LisPubAmiInVal] Utilizando un acceso vía URL tratar de listar 
 	//las publicaciones de un usuario que no sea amigo del usuario identificado en sesión.
 	@Test
 	public void LisPubAmiInVal() {
-		assertFalse(1>0);
+		PO_HomeView.clickOption(driver, "login", "id", "btnIdentificate");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
+		// Comprobamos que entramos en la sección privada
+		PO_View.checkElement(driver, "id", "zonaPrivada");
+		//Intentamos acceder a las publicaciones de un usuario que aun no es nuestro amigo
+		driver.navigate().to("http://localhost:8090/publication/publicationsFriend/18");
+		
+		
 	}
 	
 	// PR12.1 [PubFot1Val] Crear una publicación con datos válidos y una foto adjunta.

@@ -14,10 +14,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+/**
+ * Clase que permite configurar el cambio de idioma en la aplicación
+ * 
+ * @author UO231379, UO239718
+ * 
+ */
 @SuppressWarnings("deprecation")
 @Configuration
 public class CustomConfiguration extends WebMvcConfigurerAdapter{
 
+	/**
+	 * Bean de tipo LocaleREsolver que permite detectar la 
+	 * localización atual
+	 * 
+	 * @return localeResolver localizacion actual
+	 */
 	@Bean
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
@@ -25,6 +37,12 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		return localeResolver;
 	}
 
+	
+	/**
+	 * Bean que permite detectar el parámetro de idioma
+	 * 
+	 * @return localeChangeInterceptor
+	 */
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -32,12 +50,20 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		return localeChangeInterceptor;
 	}
 
+	
+	/**
+	 * Método que permite registrar los interceptores
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
 
+	/**
+	 * Metodo que permite convertir los parámetros GET page y size
+	 * a objetos Pageable
+	 */
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();

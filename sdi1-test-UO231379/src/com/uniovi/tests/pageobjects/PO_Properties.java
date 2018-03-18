@@ -34,6 +34,7 @@ public class PO_Properties {
 
 		ResourceBundle bundle = ResourceBundle.getBundle(Path, idioms[locale]);
 		String value = bundle.getString(prop);
+		@SuppressWarnings("unused")
 		String result;
 		try {
 			// Transformamos la cadena leída en formato ISO-8859-1 a UTF8

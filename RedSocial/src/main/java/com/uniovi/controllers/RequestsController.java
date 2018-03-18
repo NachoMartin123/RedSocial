@@ -2,7 +2,6 @@ package com.uniovi.controllers;
 
 import java.security.Principal;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -9,10 +9,16 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uniovi.entities.Request;
 import com.uniovi.entities.Publication;
+import com.uniovi.entities.Request;
 import com.uniovi.entities.User;
 
+/**
+ * Clase InsertSampleDataService para crear usuarios de prueba 
+ * 
+ * @author UO231379, UO239718
+ * 
+ */
 @Service
 public class InsertSampleDataService {
 	
@@ -21,8 +27,11 @@ public class InsertSampleDataService {
 	
 	@Autowired
 	private RequestsService requestsService;
+
 	
-	
+	/**
+	 * Metodo que crea dinámicmente usuarios con sus publicaciones y peticiones de amistad
+	 */
 	@PostConstruct
 	public void init() {
 		

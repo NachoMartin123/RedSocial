@@ -23,7 +23,7 @@
 						<td th:text="${request.getUserMaker().getName()}">Nombre del usuario</td>
 						<td> 
 								<div >
-									<button type="button" th:id="${'acceptFriendButton' + request.id}" class="btn btn-info" th:text="#{etiqueta.aceptar}">Aceptar</button> 
+									<button id="btnAceptarPeticion" type="button" th:id="${'acceptFriendButton' + request.id}" class="btn btn-info" th:text="#{etiqueta.aceptar}">Aceptar</button> 
 									<script th:inline="javascript"> /*
 										<![CDATA[*/ 
 											$( "#acceptFriendButton[[${request.id}]]" ).click(function() { 

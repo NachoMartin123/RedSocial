@@ -12,6 +12,13 @@ import org.springframework.validation.Validator;
 import com.uniovi.entities.User;
 import com.uniovi.services.UsersService;
 
+/**
+ *Clase que permite validar los campos del formulario de 
+ * registro de un usuario
+ * 
+ * @author UO231379, UO239718
+ * 
+ */
 @Component
 public class SignUpFormValidator  implements Validator{
 	
@@ -23,6 +30,11 @@ public class SignUpFormValidator  implements Validator{
 		return User.class.equals(aClass);
 	}
 	
+	/**
+	 * Metodo que comprueba cada dato del formulario.
+	 * En caso de que exista algún error en el, se registra la informacion
+	 * sobre este en el objeto errors
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
@@ -34,13 +46,13 @@ public class SignUpFormValidator  implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
 		Matcher mather = pattern.matcher(user.getEmail());
 		if (user.getEmail().length() < 3 || user.getEmail().length() > 24) {
-			errors.rejectValue("email", "Error.signup.dni.length");
+			errors.rejectValue("email", "Error.signup.email.length");
 		}
 		if(mather.find() == false) {
 			errors.rejectValue("email","Error.signup.email.incorrect.format");
 		}
 		if (usersService.getUserByEmail(user.getEmail()) != null) {
-			errors.rejectValue("email", "Error.signup.dni.duplicate");
+			errors.rejectValue("email", "Error.signup.email.duplicate");
 		}
 		if (user.getName().length() < 3 || user.getName().length() > 24) {
 			errors.rejectValue("name", "Error.signup.name.length");
