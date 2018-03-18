@@ -30,8 +30,8 @@ public class sdi1 {
 
 	// En Windows (Debe ser la versión 46.0 y desactivar las actualizacioens
 	// automáticas)):
-    static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
-	//static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
+    //static String PathFirefox = "C:\\Users\\Blacky\\Desktop\\PEQUE\\CURSO 2017-2018\\SDI\\PRACTICAS\\SESION_5\\Firefox46.0.win\\Firefox46.win\\FirefoxPortable.exe";
+	static String PathFirefox = "C:\\Users\\Nacho\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
 	// //En MACOSX (Debe ser la versión 46.0 y desactivar las actualizaciones
 	// automáticas):
 	// static String PathFirefox =
@@ -269,16 +269,17 @@ public class sdi1 {
 		// Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "pedro@gmail.com", "123456");
 		//Pinchamos en la opción de menu de ver usuarios: 
-		PO_NavView.clickOption(driver, "/friend/list", "text", "Mis amigos");
-		SeleniumUtils.textoNoPresentePagina(driver, "Andrea");
+		PO_NavView.clickOption(driver, "/friend/list", "text", "Listado mis amigos");
+		SeleniumUtils.textoNoPresentePagina(driver, "Cersei");
 		PO_NavView.clickOption(driver, "/request/list", "text", "Listado de invitaciones recibidas:");
-		SeleniumUtils.textoPresentePagina(driver, "Andrea");
-		//aceptar peticion de andrea
-		PO_NavView.clickOption(driver, "Aceptar", "id", "acceptFriendButton24");
-		SeleniumUtils.textoNoPresentePagina(driver, "Andrea");
-		PO_NavView.clickOption(driver, "/friend/list", "text", "Mis amigos");
+		SeleniumUtils.textoPresentePagina(driver, "Cersei");
+		//aceptar peticion de cersei
+		PO_NavView.clickButton(driver, "acceptFriendButton28");
+		SeleniumUtils.esperarSegundos(driver, 2);
+		SeleniumUtils.textoNoPresentePagina(driver, "Cersei");
+		PO_NavView.clickOption(driver, "/friend/list", "text", "Listado mis amigos");
 		//vuelta para comprobar que andrea es amiga
-		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		SeleniumUtils.textoPresentePagina(driver, "Cersei");
 	}
 	
 	// PR9.1 [PubVal] Crear una publicación con datos válidos.
@@ -412,6 +413,7 @@ public class sdi1 {
 	//Debe utilizarse un usuario identificado en sesión pero que no tenga perfil de administrador.
 	@Test
 	public void AdBorUsrInVal() {
+		//caso de uso opcional no implementado
 		assertFalse(1>0);
 	}
 }
