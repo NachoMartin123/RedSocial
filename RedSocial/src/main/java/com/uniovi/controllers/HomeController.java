@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class HomeController {
-	
+
 	/**
 	 * Metodo que devuelve la vista index
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
-	
+
 	/**
 	 * Metodo que responde a la peticion /home
 	 * 

@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uniovi.entities.Request;
 import com.uniovi.entities.User;
 
-public interface RequestsRepository extends CrudRepository<Request, Long>{
-	
+public interface RequestsRepository extends CrudRepository<Request, Long> {
+
 	@Query("SELECT r FROM Request r WHERE r.userMaker = ?2 ORDER BY r.id ASC ")
 	Page<Request> findByUserRequester(Pageable pageable, Long userMaker);
 

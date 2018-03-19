@@ -7,31 +7,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-//@Table(name="request")
+// @Table(name="request")
 public class Request {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "userTarget_id")
 	private User userTarget;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "userMaker_id")
 	private User userMaker;
-	
+
 	public Request(User userMaker, User userTarget) {
 		super();
 		this.userMaker = userMaker;
 		this.userTarget = userTarget;
 	}
-	
-		
-	public Request(){}
-	
-	
+
+	public Request() {
+	}
 
 	public Long getId() {
 		return id;
@@ -57,14 +55,10 @@ public class Request {
 		this.userMaker = userMaker;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Request [id=" + id + ", userTarget=" + userTarget.getEmail() + ", userMaker=" + userMaker.getEmail() + "]";
+		return "Request [id=" + id + ", userTarget=" + userTarget.getEmail()
+				+ ", userMaker=" + userMaker.getEmail() + "]";
 	}
-
-	
-	
 
 }

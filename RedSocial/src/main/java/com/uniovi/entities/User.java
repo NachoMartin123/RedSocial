@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * Entidad User que representa los usuarios de la aplicacion 
+ * Entidad User que representa los usuarios de la aplicacion
  * 
  * @author UO231379, UO239718
  * 
@@ -24,11 +24,11 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
-//	@Column(unique = true)
+	// @Column(unique = true)
 	private String dni;
 	@Column(unique = true)
 	private String email;
@@ -36,37 +36,37 @@ public class User {
 	private String lastName;
 	private String role;
 	private String password;
-	@Transient 
+	@Transient
 	private String passwordConfirm;
-	
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Publication> publications;
-	
-	//coleccion de invitaciones RECIBIDAS
+
+	// coleccion de invitaciones RECIBIDAS
 	@OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
 	private Set<Request> requestsReceived = new HashSet<Request>();
-	
-	
+
 	@OneToMany(mappedBy = "userMaker", cascade = CascadeType.ALL)
 	private Set<Request> requestsMaked = new HashSet<Request>();
 
-
-	//relacion many to many para la lista de amigos
+	// relacion many to many para la lista de amigos
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="friends", 
-			joinColumns= {@JoinColumn(name="user_id", referencedColumnName="id")},
-			inverseJoinColumns = {@JoinColumn(name="friend_id",referencedColumnName="id")})
-	private Set<User> friendList = new HashSet<User>();//lista de amigos 
-	
-	
+	@JoinTable(name = "friends", joinColumns = {
+			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "friend_id", referencedColumnName = "id") })
+	private Set<User> friendList = new HashSet<User>();// lista de amigos
+
 	/**
 	 * Constructor con parametros
 	 * 
-	 * @param dni del usuario
-	 * @param email del usuario
-	 * @param name del usuario
-	 * @param lastName del usuario
+	 * @param dni
+	 *            del usuario
+	 * @param email
+	 *            del usuario
+	 * @param name
+	 *            del usuario
+	 * @param lastName
+	 *            del usuario
 	 */
 	public User(String dni, String email, String name, String lastName) {
 		super();
@@ -81,7 +81,6 @@ public class User {
 	 */
 	public User() {
 	}
-	
 
 	/**
 	 * Metodo que devuelve el valor del atributo id
@@ -95,7 +94,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo id
 	 * 
-	 * @param id del usuario
+	 * @param id
+	 *            del usuario
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -113,7 +113,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo dni
 	 * 
-	 * @param dni del usuario
+	 * @param dni
+	 *            del usuario
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -131,7 +132,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo name
 	 * 
-	 * @param name - nombre del usuario
+	 * @param name
+	 *            - nombre del usuario
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -149,7 +151,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo lastName
 	 * 
-	 * @param lastName - apellido del usuario
+	 * @param lastName
+	 *            - apellido del usuario
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -167,7 +170,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo password
 	 * 
-	 * @param password - contraseña del usuario
+	 * @param password
+	 *            - contraseña del usuario
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -185,12 +189,13 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo passwordConfirm
 	 * 
-	 * @param passwordConfirm confirmacion de la contrseña
+	 * @param passwordConfirm
+	 *            confirmacion de la contrseña
 	 */
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-	
+
 	/**
 	 * Metodo que devuelve el valor del atributo role
 	 * 
@@ -203,7 +208,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo role
 	 * 
-	 * @param role - rol del usuario
+	 * @param role
+	 *            - rol del usuario
 	 */
 	public void setRole(String role) {
 		this.role = role;
@@ -221,7 +227,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo email
 	 * 
-	 * @param email del usuairo
+	 * @param email
+	 *            del usuairo
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -239,7 +246,8 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo requestsReceved
 	 * 
-	 * @param requestsReceived petiicones recibidas
+	 * @param requestsReceived
+	 *            petiicones recibidas
 	 */
 	public void setRequestsReceived(Set<Request> requestsReceived) {
 		this.requestsReceived = requestsReceived;
@@ -257,29 +265,32 @@ public class User {
 	/**
 	 * Metodo que modifica el valor del atributo requestsMaked
 	 * 
-	 * @param requestsMaked peticiones realizadas
+	 * @param requestsMaked
+	 *            peticiones realizadas
 	 */
 	public void setRequestsMaked(Set<Request> requestsMaked) {
 		this.requestsMaked = requestsMaked;
 	}
 
 	public boolean containsRequestTo(User target) {
-		for(Request r: getRequestsMaked()) {
-			if(r.getUserTarget().equals(target))
+		for (Request r : getRequestsMaked()) {
+			if (r.getUserTarget().equals(target))
 				return true;
 		}
 		return false;
 	}
 
 	/**
-	 * Metodo toString 
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", dni=" + dni + ", email=" + email + ", name=" + name + ", lastName=" + lastName
-				+ ", role=" + role + ", password=" + password + ", passwordConfirm=" + passwordConfirm
-				+ ", requestsReceived=" + requestsReceived.size() + ", requestsMaked=" + requestsMaked.size() + 
-				", friends=" + friendList.size() +"]";
+		return "User [id=" + id + ", dni=" + dni + ", email=" + email
+				+ ", name=" + name + ", lastName=" + lastName + ", role=" + role
+				+ ", password=" + password + ", passwordConfirm="
+				+ passwordConfirm + ", requestsReceived="
+				+ requestsReceived.size() + ", requestsMaked="
+				+ requestsMaked.size() + ", friends=" + friendList.size() + "]";
 	}
 
 	public Set<User> getFriendList() {
@@ -290,7 +301,6 @@ public class User {
 		this.friendList = friendList;
 	}
 
-	
 	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
@@ -298,6 +308,5 @@ public class User {
 	public Set<Publication> getPublications() {
 		return publications;
 	}
-
 
 }

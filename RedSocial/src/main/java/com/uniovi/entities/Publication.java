@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "publication")
 public class Publication {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -35,12 +35,17 @@ public class Publication {
 	/**
 	 * Constructor con parametros
 	 * 
-	 * @param titulo de la publicacion
-	 * @param texto de la publicacion
-	 * @param fecha_Creacion de la publicacion
-	 * @param user que realiza la publicacion
+	 * @param titulo
+	 *            de la publicacion
+	 * @param texto
+	 *            de la publicacion
+	 * @param fecha_Creacion
+	 *            de la publicacion
+	 * @param user
+	 *            que realiza la publicacion
 	 */
-	public Publication(String titulo, String texto,Date fecha_Creacion, User user) {
+	public Publication(String titulo, String texto, Date fecha_Creacion,
+			User user) {
 		super();
 		this.titulo = titulo;
 		this.texto = texto;
@@ -51,9 +56,12 @@ public class Publication {
 	/**
 	 * Constructor con parametros
 	 * 
-	 * @param titulo de la publicacion
-	 * @param texto de la publicacion
-	 * @param fecha_Creacion de la publicacion
+	 * @param titulo
+	 *            de la publicacion
+	 * @param texto
+	 *            de la publicacion
+	 * @param fecha_Creacion
+	 *            de la publicacion
 	 */
 	public Publication(String titulo, String texto, Date fecha_Creacion) {
 		super();
@@ -61,21 +69,22 @@ public class Publication {
 		this.texto = texto;
 		this.fecha_Creacion = fecha_Creacion;
 	}
-	
+
 	/**
 	 * Constructor con parametros
 	 * 
-	 * @param user propietario de la publicacion
+	 * @param user
+	 *            propietario de la publicacion
 	 */
 	public Publication(User user) {
 		this.user = user;
 	}
-	
+
 	/**
 	 * Constructor sin parametros
 	 */
 	public Publication() {
-		
+
 	}
 
 	/**
@@ -90,7 +99,8 @@ public class Publication {
 	/**
 	 * Metodo que modifica el valor del atributo id
 	 * 
-	 * @param id de la publicacion
+	 * @param id
+	 *            de la publicacion
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -108,7 +118,8 @@ public class Publication {
 	/**
 	 * Metodo que modifica el valor del atributo titulo
 	 * 
-	 * @param titulo de la publicacion
+	 * @param titulo
+	 *            de la publicacion
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
@@ -126,7 +137,8 @@ public class Publication {
 	/**
 	 * Metodo que modifica el valor del atributo texto
 	 * 
-	 * @param texto de la aplicacion
+	 * @param texto
+	 *            de la aplicacion
 	 */
 	public void setTexto(String texto) {
 		this.texto = texto;
@@ -144,7 +156,8 @@ public class Publication {
 	/**
 	 * Metodo que modifica el valor del atributo fechaCreacio
 	 * 
-	 * @param fecha_Creacion de la publicacion
+	 * @param fecha_Creacion
+	 *            de la publicacion
 	 */
 	public void setFecha_Creacion(Date fecha_Creacion) {
 		this.fecha_Creacion = fecha_Creacion;
@@ -162,6 +175,5 @@ public class Publication {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 }

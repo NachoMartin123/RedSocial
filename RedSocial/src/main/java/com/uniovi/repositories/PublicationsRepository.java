@@ -14,23 +14,26 @@ import com.uniovi.entities.User;
  * @author UO231379, UO239718
  * 
  */
-public interface PublicationsRepository extends CrudRepository<Publication,Long>{
+public interface PublicationsRepository
+		extends CrudRepository<Publication, Long> {
 
 	/**
-	 * Metodo que accede a la base de datos para devolver una lista paginada
-	 * de todos los usuarios de la aplicacion
+	 * Metodo que accede a la base de datos para devolver una lista paginada de
+	 * todos los usuarios de la aplicacion
+	 * 
 	 * @param pageable
 	 * @return
 	 */
 	Page<Publication> findAll(Pageable pageable);
-	
+
 	/**
-	 * Metodo de accede a la base de datos para encontrar
-	 * todas las publicaciones de un usuairo dado
+	 * Metodo de accede a la base de datos para encontrar todas las
+	 * publicaciones de un usuairo dado
+	 * 
 	 * @param user
 	 * @param pageable
 	 * @return
 	 */
 	@Query("SELECT p FROM Publication p WHERE p.user = ?1 ")
-	Page<Publication> findAllByUser(User user,Pageable pageable);
+	Page<Publication> findAllByUser(User user, Pageable pageable);
 }

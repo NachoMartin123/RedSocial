@@ -22,7 +22,7 @@ import com.uniovi.repositories.UsersRepository;
  * 
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -32,11 +32,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	 * su email y contraseña
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email)
+			throws UsernameNotFoundException {
 		User user = usersRepository.findByEmail(email);
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ESTUDIANTE"));
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-				grantedAuthorities);
+		return new org.springframework.security.core.userdetails.User(
+				user.getEmail(), user.getPassword(), grantedAuthorities);
 	}
 }

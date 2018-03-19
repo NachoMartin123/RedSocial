@@ -22,11 +22,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
  */
 @SuppressWarnings("deprecation")
 @Configuration
-public class CustomConfiguration extends WebMvcConfigurerAdapter{
+public class CustomConfiguration extends WebMvcConfigurerAdapter {
 
 	/**
-	 * Bean de tipo LocaleREsolver que permite detectar la 
-	 * localización atual
+	 * Bean de tipo LocaleREsolver que permite detectar la localización atual
 	 * 
 	 * @return localeResolver localizacion actual
 	 */
@@ -37,7 +36,6 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		return localeResolver;
 	}
 
-	
 	/**
 	 * Bean que permite detectar el parámetro de idioma
 	 * 
@@ -50,7 +48,6 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		return localeChangeInterceptor;
 	}
 
-	
 	/**
 	 * Método que permite registrar los interceptores
 	 */
@@ -59,13 +56,13 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter{
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
-
 	/**
-	 * Metodo que permite convertir los parámetros GET page y size
-	 * a objetos Pageable
+	 * Metodo que permite convertir los parámetros GET page y size a objetos
+	 * Pageable
 	 */
 	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+	public void addArgumentResolvers(
+			List<HandlerMethodArgumentResolver> argumentResolvers) {
 		PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
 		resolver.setFallbackPageable(new PageRequest(0, 5));
 		argumentResolvers.add(resolver);

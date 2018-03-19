@@ -35,40 +35,45 @@ public class PublicationsController {
 
 	@Autowired
 	private PublicationsService publicationsService;
-	
+
 	@Autowired
 	private UsersService usersService;
-	
-	@Autowired 
+
+	@Autowired
 	private RegisterPublicationFormValidator registerPublicationFormValidator;
-	
+
 	/**
-	 * Metodo que responde  la peticion /publication/addPublication
-	 * Este metodo invoca la logica de negocio correspondiente a las publicaciones y
+	 * Metodo que responde la peticion /publication/addPublication Este metodo
+	 * invoca la logica de negocio correspondiente a las publicaciones y
 	 * devuelve la vista publication/addPublication
+	 * 
 	 * @param model
 	 * @param pageable
 	 * @return
 	 */
 	@RequestMapping(value = "/publication/addPublication", method = RequestMethod.GET)
-	public String getPublication(Model model,Pageable pageable) {
-		Page<Publication> publications = publicationsService.getPublications(pageable);
+	public String getPublication(Model model, Pageable pageable) {
+		Page<Publication> publications = publicationsService
+				.getPublications(pageable);
 		model.addAttribute("publication", new Publication());
 		model.addAttribute("publicationList", publications.getContent());
 		return "publication/addPublication";
 	}
 
 	/**
-	 * Metodo POST que responde a la peticion publication/addPublication
-	 * Este metodo valida, registra la nueva publicacion y en caso de que no 
-	 * haya errores nos redirige a la vista publication/listPublications
+	 * Metodo POST que responde a la peticion publication/addPublication Este
+	 * metodo valida, registra la nueva publicacion y en caso de que no haya
+	 * errores nos redirige a la vista publication/listPublications
+	 * 
 	 * @param publication
 	 * @param result
 	 * @param principal
 	 * @return
 	 */
 	@RequestMapping(value = "/publication/addPublication", method = RequestMethod.POST)
-	public String setPublication(@ModelAttribute @Validated Publication publication, BindingResult result,Principal principal) {
+	public String setPublication(
+			@ModelAttribute @Validated Publication publication,
+			BindingResult result, Principal principal) {
 		registerPublicationFormValidator.validate(publication, result);
 		if (result.hasErrors()) {
 			return "publication/addPublication";
@@ -80,34 +85,38 @@ public class PublicationsController {
 		publicationsService.addPublication(publication);
 		return "redirect:/publication/listPublications";
 	}
-	
+
 	/**
-	 * Metodo que responde a la peticion /publication/listPublications
-	 * Este metodo invoca la logica de negocio correspondiente a las publicaciones
+	 * Metodo que responde a la peticion /publication/listPublications Este
+	 * metodo invoca la logica de negocio correspondiente a las publicaciones
 	 * para devolver la vista con todas publicaciones de un usuario
+	 * 
 	 * @param model
 	 * @param principal
 	 * @param pageable
 	 * @return
 	 */
 	@RequestMapping("/publication/listPublications")
-	public String getList(Model model, Principal principal,Pageable pageable) {
-		String email = principal.getName(); 
+	public String getList(Model model, Principal principal, Pageable pageable) {
+		String email = principal.getName();
 		User user = usersService.getUserByEmail(email);
-		Page<Publication> publications = new PageImpl<Publication>(new LinkedList<Publication>());
-	
-		publications = publicationsService.getPublicationsForUser(pageable,user) ;
-		model.addAttribute("publicationList",publications.getContent());
+		Page<Publication> publications = new PageImpl<Publication>(
+				new LinkedList<Publication>());
+
+		publications = publicationsService.getPublicationsForUser(pageable,
+				user);
+		model.addAttribute("publicationList", publications.getContent());
 		model.addAttribute("page", publications);
-		
+
 		return "publication/listPublications";
 	}
 
 	/**
 	 * Metodo que responde a la peticion /publication/publicationsFriend/{user}
-	 * Este metodo invoca la logica de negocio correspondiente a las 
-	 * publicaciones para devolver la vista con las publicaciones de un usuario amigo del 
-	 * usuairo en sesion
+	 * Este metodo invoca la logica de negocio correspondiente a las
+	 * publicaciones para devolver la vista con las publicaciones de un usuario
+	 * amigo del usuairo en sesion
+	 * 
 	 * @param model
 	 * @param principal
 	 * @param pageable
@@ -115,13 +124,16 @@ public class PublicationsController {
 	 * @return
 	 */
 	@RequestMapping("/publication/publicationsFriend/{user}")
-	public String getListForUserFriend(Model model, Principal principal,Pageable pageable,@PathVariable User user) {
-		Page<Publication> publications = new PageImpl<Publication>(new LinkedList<Publication>());
-	
-		publications = publicationsService.getPublicationsForUser(pageable,user) ;
-		model.addAttribute("publicationList",publications.getContent());
+	public String getListForUserFriend(Model model, Principal principal,
+			Pageable pageable, @PathVariable User user) {
+		Page<Publication> publications = new PageImpl<Publication>(
+				new LinkedList<Publication>());
+
+		publications = publicationsService.getPublicationsForUser(pageable,
+				user);
+		model.addAttribute("publicationList", publications.getContent());
 		model.addAttribute("page", publications);
-		
+
 		return "publication/listPublications";
 	}
 

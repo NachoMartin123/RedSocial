@@ -16,18 +16,18 @@ import com.uniovi.services.UsersService;
 
 @Controller
 public class FriendsController {
-	
+
 	@Autowired
 	private UsersService usersService;
-	
-	
-	@RequestMapping("/friend/list" )
-	public String getListado(Model model,Pageable pageable,Principal principal){
+
+	@RequestMapping("/friend/list")
+	public String getListado(Model model, Pageable pageable,
+			Principal principal) {
 		String dni = principal.getName(); // DNI es el name de la autenticación
 		User userEnSesion = usersService.getUserByEmail(dni);
-		
+
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		users = usersService.getFriendsForUser(pageable, userEnSesion) ;
+		users = usersService.getFriendsForUser(pageable, userEnSesion);
 		model.addAttribute("friendList", users.getContent());
 		model.addAttribute("page", users);
 		model.addAttribute("userEnSesion", userEnSesion);

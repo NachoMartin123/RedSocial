@@ -20,8 +20,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -30,18 +30,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 
-	
 	/**
 	 * Método configure que permite establecer las autorizaciones de las URLs
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-				   .antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup").permitAll()
-				   .anyRequest().authenticated()
-				   .and()
-				   .formLogin().loginPage("/login").permitAll()
-				   .defaultSuccessUrl("/home").failureUrl("/login?error=true").and().logout().permitAll();
+				.antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup")
+				.permitAll().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll().defaultSuccessUrl("/home")
+				.failureUrl("/login?error=true").and().logout().permitAll();
 	}
 
 	/**
@@ -50,15 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	 * @throws Exception
 	 */
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.userDetailsService(userDetailsService)
+				.passwordEncoder(bCryptPasswordEncoder());
 	}
-	
+
 	@Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception        
-    {
-        return super.authenticationManagerBean();
-    }
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
 }
